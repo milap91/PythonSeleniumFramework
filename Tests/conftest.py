@@ -7,7 +7,7 @@ driver = None
 
 def pytest_addoption(parser):
     parser.addoption(
-        "--browser_name", action="store", default="chrome"
+        "--browser_name", action="store", default="firefox"
     )
 
 
@@ -20,8 +20,9 @@ def setup(request):
     elif browser_name == "firefox":
         driver = webdriver.Firefox(executable_path="C:\\Users\\milap\\OneDrive\\Desktop\\selenium\\geckodriver.exe")
     elif browser_name == "IE":
-        print("IE driver")
-    driver.get("https://rahulshettyacademy.com/angularpractice/")
+        driver = webdriver.Ie(executable_path="C:\\Users\\milap\\OneDrive\\Desktop\\selenium\\IEDriverServer.exe")
+
+    driver.get("https://rahulshettyacademy.com/seleniumPractise/#/")
     driver.maximize_window()
 
     request.cls.driver = driver

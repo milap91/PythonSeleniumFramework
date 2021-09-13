@@ -7,13 +7,14 @@ from PageObjects.GreenCart_HomePage import GreenCart_HomePage
 from PageObjects.PromoCodePage import PromoCodePage
 from PageObjects.TermsConditionPage import TermsConditionPage
 from Tests.conftest import setup
+from Utilities.BaseClass import BaseClass
 
 
-@pytest.mark.usefixtures("setup")
-class Test_endtoend:
+class Test_endtoend(BaseClass):
     def test_e2e1(self):
-
+        log = self.getLogger()
         Homepage = GreenCart_HomePage(self.driver)
+        log.info("searching the product name")
         Homepage.search_product("berry")
         Homepage.verify_products_count(2)
         Homepage.verify_products_name_and_add_them_in_cart()
@@ -31,4 +32,5 @@ class Test_endtoend:
         Termspage = TermsConditionPage(self.driver)
         Termspage.Accept_Conditions("India")
         Termspage.verify_success_Text()
+        log.info("Test completed successfully")
         time.sleep(3)
